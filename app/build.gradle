@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.noveogroup.modulotechinterview'
+    compileSdk config.sdk.compile
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    defaultConfig {
+        applicationId config.package
+        minSdk config.sdk.min
+        targetSdk config.sdk.target
+        versionCode config.build.code
+        versionName config.build.name
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        debug {}
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    implementation project(':domain')
+
+    implementation lib.androidXAppCompat
+    implementation lib.androidXRecyclerView
+    implementation lib.androidXDesign
+    implementation lib.androidXConstraint
+    implementation lib.androidXMultiDex
+
+    implementation lib.lifecycleViewModel
+    implementation lib.lifecycleSavedState
+    implementation lib.lifecycleLiveData
+    implementation lib.lifecycleAnnotation
+    implementation lib.lifecycleRuntine
+    kapt lib.lifecycleCompiler
+    implementation lib.lifecycleNavigation
+    implementation lib.lifecycleNavigationUi
+
+    implementation lib.koinCore
+    implementation lib.koinAndroid
+}

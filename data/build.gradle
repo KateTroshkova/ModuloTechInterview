@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.noveogroup.modulotechinterview.data'
+    compileSdk config.sdk.compile
+
+    defaultConfig {
+        minSdk config.sdk.min
+        targetSdk config.sdk.target
+        versionCode config.build.code
+        versionName config.build.name
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "false",
+                        "room.expandProjection": "true"
+                ]
+            }
+        }
+
+        buildConfigField("String", "API_ROOT", '"' + config.api_root + '"')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    implementation project(':domain')
+
+    /* AndroidX */
+    implementation lib.androidXCore
+
+    /* Network */
+    implementation lib.retrofit2
+    implementation lib.moshi
+    kapt lib.moshiKotlin
+    implementation lib.moshiRetrofit2
+
+    /* Room */
+    implementation lib.roomCore
+    kapt lib.roomAnnotations
+    implementation lib.roomKt
+
+    /* DI */
+    implementation lib.koinCore
+}
