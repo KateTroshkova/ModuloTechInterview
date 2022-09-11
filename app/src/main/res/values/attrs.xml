@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalSeekBar">
+        <attr name="vsb_bar_background_color" format="color" />
+        <attr name="vsb_bar_progress_color" format="color" />
+        <attr name="vsb_progress" format="integer" />
+        <attr name="vsb_max_value" format="integer" />
+        <attr name="vsb_thumb_placeholder_src" format="integer" />
+    </declare-styleable>
+</resources>
