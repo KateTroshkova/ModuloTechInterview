@@ -22,9 +22,9 @@ open class VerticalSeekBar @JvmOverloads constructor(
         private const val DEFAULT_PROGRESS = 0
     }
 
-    private var onProgressChangeListener: ((Int) -> Unit)? = null
-    private var onPressListener: ((Int) -> Unit)? = null
-    private var onReleaseListener: ((Int) -> Unit)? = null
+    var onProgressChangeListener: ((Int) -> Unit)? = null
+    var onPressListener: ((Int) -> Unit)? = null
+    var onReleaseListener: ((Int) -> Unit)? = null
 
     private val binding =
         ViewVerticalSliderBinding.inflate(LayoutInflater.from(context), this, true)
@@ -152,18 +152,6 @@ open class VerticalSeekBar @JvmOverloads constructor(
                 true
             }
         }
-    }
-
-    fun setOnProgressChangeListener(listener: ((Int) -> Unit)?) {
-        this.onProgressChangeListener = listener
-    }
-
-    fun setOnPressListener(listener: ((Int) -> Unit)?) {
-        this.onPressListener = listener
-    }
-
-    fun setOnReleaseListener(listener: ((Int) -> Unit)?) {
-        this.onReleaseListener = listener
     }
 
     private fun updateViews() {
