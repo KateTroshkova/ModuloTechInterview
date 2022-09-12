@@ -1,5 +1,6 @@
 package com.noveogroup.modulotechinterview.data.di
 
+import com.noveogroup.modulotechinterview.data.BuildConfig
 import com.noveogroup.modulotechinterview.data.network.api.Storage42Api
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -15,11 +16,11 @@ val networkModule = module {
             .addConverterFactory(MoshiConverterFactory.create(get()))
     }
 
-    // OkHttpClient
     factory {
         OkHttpClient.Builder()
             .connectTimeout(timeout, TimeUnit.SECONDS)
             .readTimeout(timeout, TimeUnit.SECONDS)
+            .build()
     }
     single {
         provideInventoryApi(get(), get())
@@ -30,7 +31,7 @@ private fun provideInventoryApi(
     retrofitBuilder: Retrofit.Builder,
     okHttpClient: OkHttpClient
 ): Storage42Api = retrofitBuilder
-    .baseUrl("https:")
+    .baseUrl(BuildConfig.API_ROOT)
     .client(okHttpClient)
     .build()
     .create(Storage42Api::class.java)

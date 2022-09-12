@@ -9,7 +9,7 @@ import com.noveogroup.modulotechinterview.domain.entity.device.Heater
 import com.noveogroup.modulotechinterview.domain.entity.device.Light
 import com.noveogroup.modulotechinterview.domain.entity.device.Shutter
 
-class DeviceConverter : Mapper<Device, DeviceResponse>(
+object DeviceConverter : Mapper<Device, DeviceResponse>(
     fromDtoMapper = {
         when (it.productType) {
             ProductTypeResponse.Light -> Light(
