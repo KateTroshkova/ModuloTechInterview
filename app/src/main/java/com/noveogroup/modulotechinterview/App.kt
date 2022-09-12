@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.multidex.MultiDexApplication
 import com.noveogroup.modulotechinterview.data.di.databaseModule
 import com.noveogroup.modulotechinterview.data.di.networkModule
+import com.noveogroup.modulotechinterview.data.di.preferencesModule
 import com.noveogroup.modulotechinterview.data.di.repositoryModule
 import com.noveogroup.modulotechinterview.di.*
 import org.koin.android.ext.koin.androidContext
@@ -36,6 +37,7 @@ class App : MultiDexApplication() {
                 repositoryModule,
                 interceptorModule,
                 databaseModule,
+                preferencesModule,
             )
         }
     }
