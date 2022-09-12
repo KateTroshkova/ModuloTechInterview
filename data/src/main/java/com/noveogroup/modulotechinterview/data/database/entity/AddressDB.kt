@@ -20,7 +20,7 @@ internal data class AddressDB(
 
     companion object {
         const val TABLE_NAME = "addresses"
-        private const val COLUMN_ID = "id"
+        private const val COLUMN_ID = "address_id"
         private const val COLUMN_CITY = "city"
         private const val COLUMN_POSTAL_CODE = "postal_code"
         private const val COLUMN_STREET = "street"

@@ -10,7 +10,7 @@ internal class DatabaseProvider(context: Context) {
         .databaseBuilder(
             context,
             Database::class.java,
-            "modulotech_db.db"
+            "modulotech_db"
         )
         .build()
 

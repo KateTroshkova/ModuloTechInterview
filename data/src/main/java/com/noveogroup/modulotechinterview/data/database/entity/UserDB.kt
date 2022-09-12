@@ -10,7 +10,7 @@ import com.noveogroup.modulotechinterview.data.database.entity.UserDB.Companion.
 internal data class UserDB(
     @ColumnInfo(name = COLUMN_FIRST_NAME) val firstName: String?,
     @ColumnInfo(name = COLUMN_LAST_NAME) val lastName: String?,
-    @Embedded @ColumnInfo(name = COLUMN_ADDRESS) val address: AddressDB?,
+    @Embedded val address: AddressDB?,
     @ColumnInfo(name = COLUMN_DATE) val birthdate: String?
 ) {
 

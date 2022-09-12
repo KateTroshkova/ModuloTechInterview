@@ -6,4 +6,4 @@ open class Device(
     val id: String,
     val deviceName: String,
     val productType: ProductType
-)
+) : java.io.Serializable

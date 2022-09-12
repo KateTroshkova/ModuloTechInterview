@@ -8,4 +8,8 @@ class DeviceInteractor(
 ) {
 
     suspend fun loadDevices(): List<Device> = deviceRepository.loadDevices()
+
+    suspend fun deleteDevice(device: Device) = deviceRepository.deleteDevice(device)
+
+    suspend fun updateDevice(device: Device) = deviceRepository.updateDevice(device)
 }

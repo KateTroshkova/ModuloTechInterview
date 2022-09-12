@@ -3,7 +3,7 @@ package com.noveogroup.modulotechinterview.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.noveogroup.modulotechinterview.data.database.entity.UserDB.Companion.TABLE_NAME
+import com.noveogroup.modulotechinterview.data.database.entity.DeviceDB.Companion.TABLE_NAME
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
 import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 
