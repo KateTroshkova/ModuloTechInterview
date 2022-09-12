@@ -6,7 +6,6 @@ import org.koin.core.component.KoinComponent
 
 abstract class MvvmViewModel : ViewModel(), KoinComponent {
 
-    protected abstract val tag: String
     var savedState: SavedStateHandle = SavedStateHandle()
 
     open fun attach() {
