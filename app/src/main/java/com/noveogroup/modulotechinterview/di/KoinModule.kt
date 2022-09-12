@@ -1,6 +1,8 @@
 package com.noveogroup.modulotechinterview.di
 
 import com.noveogroup.modulotechinterview.domain.interactor.DeviceInteractor
+import com.noveogroup.modulotechinterview.domain.interactor.SyncInteractor
+import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
 import com.noveogroup.modulotechinterview.main.MainActivity
 import com.noveogroup.modulotechinterview.main.MainViewModel
 import com.noveogroup.modulotechinterview.main.pages.device.DeviceFragment
@@ -47,4 +49,6 @@ val profileFragmentModule = module {
 
 val interceptorModule = module {
     single { DeviceInteractor(get()) }
+    single { SyncInteractor(get()) }
+    single { UserInteractor(get()) }
 }

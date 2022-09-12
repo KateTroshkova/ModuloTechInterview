@@ -6,5 +6,7 @@ interface DeviceRepositoryApi {
 
     suspend fun loadDevices(): List<Device>
 
-    suspend fun deleteDevice()
+    suspend fun deleteDevice(device: Device)
+
+    suspend fun updateDevice(device: Device)
 }

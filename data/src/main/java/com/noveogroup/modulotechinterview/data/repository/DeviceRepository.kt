@@ -1,23 +1,30 @@
 package com.noveogroup.modulotechinterview.data.repository
 
-import com.noveogroup.modulotechinterview.data.network.api.Storage42Api
-import com.noveogroup.modulotechinterview.data.network.converter.DeviceConverter
+import com.noveogroup.modulotechinterview.data.database.dao.DeviceDao
+import com.noveogroup.modulotechinterview.data.database.mapper.DeviceDBMapper
 import com.noveogroup.modulotechinterview.domain.api.DeviceRepositoryApi
 import com.noveogroup.modulotechinterview.domain.entity.device.Device
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DeviceRepository(
-    private val api: Storage42Api
+internal class DeviceRepository(
+    private val deviceDao: DeviceDao,
 ) : DeviceRepositoryApi {
+
     override suspend fun loadDevices(): List<Device> =
         withContext(Dispatchers.IO) {
-            val response = api.loadAllData()
-            response.devices
-                .map { DeviceConverter.fromDto(it) }
+            deviceDao.selectAll().map { DeviceDBMapper.fromDto(it) }
         }
 
-    override suspend fun deleteDevice() {
-        TODO("Not yet implemented")
+    override suspend fun deleteDevice(device: Device) {
+        withContext(Dispatchers.IO) {
+            deviceDao.delete(DeviceDBMapper.fromBusiness(device))
+        }
+    }
+
+    override suspend fun updateDevice(device: Device) {
+        withContext(Dispatchers.IO) {
+            deviceDao.update(DeviceDBMapper.fromBusiness(device))
+        }
     }
 }
