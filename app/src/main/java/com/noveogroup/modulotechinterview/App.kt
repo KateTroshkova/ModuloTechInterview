@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.multidex.MultiDexApplication
+import com.noveogroup.modulotechinterview.data.di.databaseModule
 import com.noveogroup.modulotechinterview.data.di.networkModule
 import com.noveogroup.modulotechinterview.data.di.repositoryModule
 import com.noveogroup.modulotechinterview.di.*
@@ -34,6 +35,7 @@ class App : MultiDexApplication() {
                 networkModule,
                 repositoryModule,
                 interceptorModule,
+                databaseModule,
             )
         }
     }

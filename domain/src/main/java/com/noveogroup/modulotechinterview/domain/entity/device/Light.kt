@@ -6,6 +6,6 @@ import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 class Light(
     id: String,
     deviceName: String,
-    intensity: Int,
-    mode: DeviceMode
+    val intensity: Int,
+    val mode: DeviceMode
 ) : Device(id, deviceName, ProductType.LIGHT)
