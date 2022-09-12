@@ -5,8 +5,12 @@ import com.noveogroup.modulotechinterview.domain.interactor.SyncInteractor
 import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
 import com.noveogroup.modulotechinterview.main.MainActivity
 import com.noveogroup.modulotechinterview.main.MainViewModel
-import com.noveogroup.modulotechinterview.main.pages.device.DeviceFragment
-import com.noveogroup.modulotechinterview.main.pages.device.DeviceViewModel
+import com.noveogroup.modulotechinterview.main.pages.device_heater.HeaterFragment
+import com.noveogroup.modulotechinterview.main.pages.device_heater.HeaterViewModel
+import com.noveogroup.modulotechinterview.main.pages.device_light.LightFragment
+import com.noveogroup.modulotechinterview.main.pages.device_light.LightViewModel
+import com.noveogroup.modulotechinterview.main.pages.device_shutter.ShutterFragment
+import com.noveogroup.modulotechinterview.main.pages.device_shutter.ShutterViewModel
 import com.noveogroup.modulotechinterview.main.pages.home.HomeFragment
 import com.noveogroup.modulotechinterview.main.pages.home.HomeViewModel
 import com.noveogroup.modulotechinterview.main.pages.profile.ProfileFragment
@@ -26,15 +30,31 @@ val activityModule = module {
 val homeFragmentModule = module {
     scope<HomeFragment> {
         viewModel {
-            HomeViewModel(get())
+            HomeViewModel(get(), get())
         }
     }
 }
 
-val deviceFragmentModule = module {
-    scope<DeviceFragment> {
+val deviceHeaterFragmentModule = module {
+    scope<HeaterFragment> {
         viewModel {
-            DeviceViewModel()
+            HeaterViewModel(get())
+        }
+    }
+}
+
+val deviceLightFragmentModule = module {
+    scope<LightFragment> {
+        viewModel {
+            LightViewModel(get())
+        }
+    }
+}
+
+val deviceShuttersFragmentModule = module {
+    scope<ShutterFragment> {
+        viewModel {
+            ShutterViewModel(get())
         }
     }
 }
@@ -42,7 +62,7 @@ val deviceFragmentModule = module {
 val profileFragmentModule = module {
     scope<ProfileFragment> {
         viewModel {
-            ProfileViewModel()
+            ProfileViewModel(get())
         }
     }
 }

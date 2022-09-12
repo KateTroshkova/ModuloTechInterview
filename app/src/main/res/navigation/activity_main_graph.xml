@@ -10,17 +10,45 @@
         android:name="com.noveogroup.modulotechinterview.main.pages.home.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_device"
-            app:destination="@id/deviceFragment" />
+            android:id="@+id/action_home_to_heater"
+            app:destination="@id/heaterFragment" />
+        <action
+            android:id="@+id/action_home_to_light"
+            app:destination="@id/lightFragment" />
+        <action
+            android:id="@+id/action_home_to_shutters"
+            app:destination="@id/shutterFragment" />
         <action
             android:id="@+id/action_home_to_profile"
             app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/deviceFragment"
-        android:name="com.noveogroup.modulotechinterview.main.pages.device.DeviceFragment"
-        tools:layout="@layout/fragment_device" />
+        android:id="@+id/heaterFragment"
+        android:name="com.noveogroup.modulotechinterview.main.pages.device_heater.HeaterFragment"
+        tools:layout="@layout/fragment_heater">
+        <argument
+            android:name="device"
+            app:argType="com.noveogroup.modulotechinterview.domain.entity.device.Heater" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lightFragment"
+        android:name="com.noveogroup.modulotechinterview.main.pages.device_light.LightFragment"
+        tools:layout="@layout/fragment_light">
+        <argument
+            android:name="device"
+            app:argType="com.noveogroup.modulotechinterview.domain.entity.device.Light" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shutterFragment"
+        android:name="com.noveogroup.modulotechinterview.main.pages.device_shutter.ShutterFragment"
+        tools:layout="@layout/fragment_shutters">
+        <argument
+            android:name="device"
+            app:argType="com.noveogroup.modulotechinterview.domain.entity.device.Shutter" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"

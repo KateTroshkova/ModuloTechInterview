@@ -17,7 +17,7 @@ class HomeFragment : BaseFragment() {
 
     private val adapter: DeviceAdapter by lazy {
         DeviceAdapter(
-            { navigator.openDevice() },
+            navigator::openDevice,
             viewModel::deleteDevice
         )
     }
