@@ -6,7 +6,9 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.R
+import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.common.listener.SimpleSeekBarChangeListener
 import com.noveogroup.modulotechinterview.databinding.FragmentLightBinding
@@ -38,16 +40,18 @@ class LightFragment : BaseFragment() {
             lightLayout.onOffSwitch.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.updateMode(isChecked)
             }
-            lightLayout.lightSeekBar.setOnSeekBarChangeListener(object :
-                SimpleSeekBarChangeListener() {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    viewModel.updateIntensity(progress)
+            lightLayout.lightSeekBar.setOnSeekBarChangeListener(
+                object :
+                    SimpleSeekBarChangeListener() {
+                    override fun onProgressChanged(
+                        seekBar: SeekBar?,
+                        progress: Int,
+                        fromUser: Boolean
+                    ) {
+                        viewModel.updateIntensity(progress)
+                    }
                 }
-            })
+            )
         }
         observeLiveData()
     }
@@ -55,6 +59,8 @@ class LightFragment : BaseFragment() {
     override fun observeLiveData() {
         super.observeLiveData()
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
+        viewModel.errorEvent.observe(viewLifecycleOwner, errorObserver)
+        viewModel.loadingState.observe(viewLifecycleOwner, loadingObserver)
     }
 
     private val stateObserver: Observer<LightState>
@@ -63,22 +69,31 @@ class LightFragment : BaseFragment() {
                 lightLayout.onOffSwitch.isChecked = it.mode == DeviceMode.ON
                 lightLayout.lightSeekBar.progress = it.intensity
                 lightLayout.progressView.setBackgroundColor(
-                    when {
-                        it.intensity < 33 -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.low
-                        )
-                        it.intensity in 33..66 -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.accent
-                        )
-                        else -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.high
-                        )
-                    }
+                    ContextCompat.getColor(
+                        requireContext(),
+                        when {
+                            it.intensity < 33 -> R.color.low
+                            it.intensity in 33..66 -> R.color.accent
+                            else -> R.color.high
+                        }
+                    )
                 )
                 lightLayout.currentValueTextView.text = it.intensity.toString()
             }
+        }
+
+    private val errorObserver: Observer<Throwable>
+        get() = Observer {
+            Snackbar.make(
+                binding.deviceLayout,
+                it?.localizedMessage ?: "",
+                Snackbar.LENGTH_SHORT
+            )
+                .show()
+        }
+
+    private val loadingObserver: Observer<Boolean>
+        get() = Observer {
+            binding.progressBar.show(it)
         }
 }
