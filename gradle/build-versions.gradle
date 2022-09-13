@@ -18,3 +18,10 @@ ext.config = [
                 compile: 32,
         ]
 ]
+
+ext.signing = [
+        keyAlias     : properties.getProperty("KEY_ALIAS"),
+        keyPassword  : properties.getProperty("KEY_PASSWORD"),
+        storeFile    : properties.getProperty("KEY_STORE_FILE"),
+        storePassword: properties.getProperty("KEY_STORE_PASSWORD"),
+]

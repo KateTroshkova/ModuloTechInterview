@@ -23,11 +23,30 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    buildTypes {
-        debug {}
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            keyAlias signing.keyAlias
+            keyPassword signing.keyPassword
+            storeFile file(signing.storeFile)
+            storePassword signing.storePassword
+        }
+        debug {
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            splits.abi.enable = false
+            splits.density.enable = false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
