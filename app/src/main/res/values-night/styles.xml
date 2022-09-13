@@ -46,5 +46,6 @@
         <item name="boxStrokeColor">@color/selector_color_edittext</item>
         <item name="hintTextColor">@color/text_secondary_night</item>
         <item name="errorTextColor">@color/accent</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 </resources>

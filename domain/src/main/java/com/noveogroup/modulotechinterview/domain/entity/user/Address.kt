@@ -6,4 +6,4 @@ data class Address(
     val street: String,
     val streetCode: String,
     val country: String
-)
+) : java.io.Serializable

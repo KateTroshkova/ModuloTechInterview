@@ -5,4 +5,5 @@ data class User(
     val lastName: String,
     val address: Address?,
     val birthdate: String
-)
+) : java.io.Serializable
+

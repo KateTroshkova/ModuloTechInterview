@@ -34,7 +34,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name" />
+                android:hint="@string/hint_first_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -51,11 +51,11 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Last Name" />
+                android:hint="@string/hint_last_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailLayout"
+            android:id="@+id/birthdateLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_large"
@@ -68,7 +68,9 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="dd/mm/yyyy" />
+                android:digits="0123456789/"
+                android:hint="@string/hint_birthdate"
+                android:maxEms="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -78,10 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
             android:gravity="center"
+            android:text="@string/personal_info_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatarImageView"
-            tools:text="Personal information" />
+            app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
 
         <TextView
             android:id="@+id/addressTextView"
@@ -90,10 +92,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
             android:gravity="center"
+            android:text="@string/address_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailLayout"
-            tools:text="Address" />
+            app:layout_constraintTop_toBottomOf="@id/birthdateLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/cityLayout"
@@ -109,7 +111,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="city" />
+                android:hint="@string/hint_city" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +128,8 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="000000" />
+                android:hint="@string/hint_postalCode"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -143,7 +146,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="street" />
+                android:hint="@string/hint_street" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -160,7 +163,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="street code" />
+                android:hint="@string/hint_street_code" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -177,18 +180,33 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="country" />
+                android:hint="@string/hint_country" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
             style="@style/Button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large_x"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/countryLayout" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

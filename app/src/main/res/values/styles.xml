@@ -46,5 +46,10 @@
         <item name="boxStrokeColor">@color/selector_color_edittext</item>
         <item name="hintTextColor">@color/text_secondary</item>
         <item name="errorTextColor">@color/accent</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
     </style>
 </resources>
