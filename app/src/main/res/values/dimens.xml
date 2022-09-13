@@ -5,8 +5,8 @@
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_large_x">48dp</dimen>
 
-    <dimen name="text_size_normal">16sp</dimen>
-    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_normal">16dp</dimen>
+    <dimen name="text_size_title">20dp</dimen>
 
     <dimen name="button_radius">40dp</dimen>
     <dimen name="edit_text_radius">4dp</dimen>
