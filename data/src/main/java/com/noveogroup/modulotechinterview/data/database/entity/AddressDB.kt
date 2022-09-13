@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.noveogroup.modulotechinterview.data.database.entity.AddressDB.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-internal data class AddressDB(
+data class AddressDB(
     @ColumnInfo(name = COLUMN_CITY) val city: String?,
     @ColumnInfo(name = COLUMN_POSTAL_CODE) val postalCode: String?,
     @ColumnInfo(name = COLUMN_STREET) val street: String?,

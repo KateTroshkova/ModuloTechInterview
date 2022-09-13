@@ -96,4 +96,14 @@ dependencies {
 
     implementation lib.koinCore
     implementation lib.koinAndroid
+
+    implementation lib.roomCore
+    kapt lib.roomAnnotations
+    implementation lib.roomKt
+
+    testImplementation lib.junit
+    testImplementation lib.mockito
+    testImplementation lib.mockk
+    testImplementation lib.roomTest
+    testImplementation lib.testCore
 }

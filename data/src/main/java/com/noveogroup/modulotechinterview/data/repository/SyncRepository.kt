@@ -12,7 +12,7 @@ import com.noveogroup.modulotechinterview.domain.api.SyncRepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal class SyncRepository(
+class SyncRepository(
     private val api: Storage42Api,
     private val deviceDao: DeviceDao,
     private val userDao: UserDao,

@@ -7,7 +7,7 @@ import com.noveogroup.modulotechinterview.domain.entity.user.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal class UserRepository(
+class UserRepository(
     private val userDao: UserDao
 ) : UserRepositoryApi {
 

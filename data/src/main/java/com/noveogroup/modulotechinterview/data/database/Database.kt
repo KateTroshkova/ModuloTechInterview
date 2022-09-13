@@ -21,7 +21,7 @@ import com.noveogroup.modulotechinterview.data.database.entity.UserDB
 @TypeConverters(
     EnumConverter::class,
 )
-internal abstract class Database : RoomDatabase() {
+abstract class Database : RoomDatabase() {
 
     abstract fun deviceDao(): DeviceDao
     abstract fun userDao(): UserDao

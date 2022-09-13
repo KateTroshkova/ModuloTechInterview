@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.noveogroup.modulotechinterview.data.database.entity.UserDB.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-internal data class UserDB(
+data class UserDB(
     @ColumnInfo(name = COLUMN_FIRST_NAME) val firstName: String?,
     @ColumnInfo(name = COLUMN_LAST_NAME) val lastName: String?,
     @Embedded val address: AddressDB?,

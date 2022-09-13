@@ -1,8 +1,12 @@
 package com.noveogroup.modulotechinterview.data.database.dao
 
-import androidx.room.*
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Transaction
+import androidx.room.Update
 
-internal abstract class BaseDao<T> {
+abstract class BaseDao<T> {
 
     private val FAILED_OPERATION: Long get() = -1L
 

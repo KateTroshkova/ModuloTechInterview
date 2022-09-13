@@ -2,7 +2,7 @@ package com.noveogroup.modulotechinterview.data.preferences
 
 import android.content.SharedPreferences
 
-internal class DataPreferences(
+class DataPreferences(
     sharedPreferences: SharedPreferences
 ) : BasePreferences(sharedPreferences) {
 

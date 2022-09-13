@@ -14,6 +14,10 @@ ext.versions = [
         moshiRetrofit     : "2.9.0",
         room              : "2.4.3",
         coroutines        : "1.6.4",
+        junit             : "4.13.2",
+        mockito           : "4.8.0",
+        mockk             : "1.10.2",
+        testCore          : "1.4.0",
 ]
 ext.lib = [
         androidXCore         : "androidx.core:core:$versions.androidXCore",
@@ -40,5 +44,10 @@ ext.lib = [
         roomCore             : "androidx.room:room-runtime:$versions.room",
         roomAnnotations      : "androidx.room:room-compiler:$versions.room",
         roomKt               : "androidx.room:room-ktx:$versions.room",
+        roomTest             : "androidx.room:room-testing:$versions.room",
         coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+        junit                : "junit:junit:$versions.junit",
+        mockito              : "org.mockito:mockito-core:$versions.mockito",
+        mockk                : "io.mockk:mockk:$versions.mockk",
+        testCore             : "androidx.test:core:$versions.textCore",
 ]

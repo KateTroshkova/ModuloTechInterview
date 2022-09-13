@@ -8,7 +8,7 @@ import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
 import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 
 @Entity(tableName = TABLE_NAME)
-internal data class DeviceDB(
+data class DeviceDB(
     @PrimaryKey @ColumnInfo(name = COLUMN_ID) val id: String,
     @ColumnInfo(name = COLUMN_PRODUCT_TYPE) val productType: ProductType,
     @ColumnInfo(name = COLUMN_DEVICE_NAME) val deviceName: String?,

@@ -7,7 +7,7 @@ import com.noveogroup.modulotechinterview.domain.entity.device.Device
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal class DeviceRepository(
+class DeviceRepository(
     private val deviceDao: DeviceDao,
 ) : DeviceRepositoryApi {
 
