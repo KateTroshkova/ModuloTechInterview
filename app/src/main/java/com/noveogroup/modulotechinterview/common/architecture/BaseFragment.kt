@@ -47,8 +47,6 @@ abstract class BaseFragment : ScopeFragment(), NestedInflater {
         return requireActivity().safeCast<NavigationProvider>()?.navigator
     }
 
-    val contentView get() = requireView()
-
     fun <Binding : ViewBinding> viewBinding(factory: BindingFactory<Binding>) =
         viewBindingDelegate.createPrimaryViewBindingHandler(factory)
 

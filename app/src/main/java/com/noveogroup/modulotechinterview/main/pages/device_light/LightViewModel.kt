@@ -33,12 +33,14 @@ class LightViewModel(
     }
 
     fun applyState(device: Light) {
-        currentState = currentState.copy(
-            defaultLight = device,
-            mode = device.mode,
-            intensity = device.intensity
-        )
-        updateState()
+        if (currentState.defaultLight == null) {
+            currentState = currentState.copy(
+                defaultLight = device,
+                mode = device.mode,
+                intensity = device.intensity
+            )
+            updateState()
+        }
     }
 
     fun updateMode(isEnabled: Boolean) {

@@ -16,8 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:vsb_bar_background_color="@color/text_secondary"
         app:vsb_bar_progress_color="@color/accent"
-        app:vsb_max_value="100"
-        app:vsb_progress="40" />
+        app:vsb_max_value="100" />
 
     <TextView
         android:id="@+id/currentValueTextView"

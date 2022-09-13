@@ -2,8 +2,12 @@ package com.noveogroup.modulotechinterview.main.pages.device_shutter
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
+import com.noveogroup.modulotechinterview.R
+import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.databinding.FragmentShuttersBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,12 +42,38 @@ class ShutterFragment : BaseFragment() {
     override fun observeLiveData() {
         super.observeLiveData()
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
+        viewModel.errorEvent.observe(viewLifecycleOwner, errorObserver)
+        viewModel.loadingState.observe(viewLifecycleOwner, loadingObserver)
     }
 
     private val stateObserver: Observer<ShutterState>
         get() = Observer {
             with(binding) {
                 shuttersLayout.seekBar.progress = it.position
+                shuttersLayout.seekBar.barProgressColor = ContextCompat.getColor(
+                    requireContext(),
+                    when {
+                        it.position < 33 -> R.color.low
+                        it.position in 33..66 -> R.color.accent
+                        else -> R.color.high
+                    }
+                )
+                shuttersLayout.currentValueTextView.text = it.position.toString()
             }
+        }
+
+    private val errorObserver: Observer<Throwable>
+        get() = Observer {
+            Snackbar.make(
+                binding.deviceLayout,
+                it?.localizedMessage ?: "",
+                Snackbar.LENGTH_SHORT
+            )
+                .show()
+        }
+
+    private val loadingObserver: Observer<Boolean>
+        get() = Observer {
+            binding.progressBar.show(it)
         }
 }

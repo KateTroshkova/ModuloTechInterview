@@ -34,12 +34,14 @@ class HeaterViewModel(
     }
 
     fun applyState(device: Heater) {
-        currentState = currentState.copy(
-            defaultHeater = device,
-            mode = device.mode,
-            temperature = device.temperature
-        )
-        updateState()
+        if (currentState.defaultHeater == null) {
+            currentState = currentState.copy(
+                defaultHeater = device,
+                mode = device.mode,
+                temperature = device.temperature
+            )
+            updateState()
+        }
     }
 
     fun updateMode(isEnabled: Boolean) {
