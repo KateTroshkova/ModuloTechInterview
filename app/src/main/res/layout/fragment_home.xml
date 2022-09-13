@@ -9,8 +9,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/deviceRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/margin_small"
+        android:layout_height="0dp"
+        android:paddingVertical="@dimen/margin_large_x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        android:enabled="false"
-        android:text="Shutters"
+        android:text="@string/shutters"
         app:layout_constraintEnd_toStartOf="@id/lightButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        android:text="Light"
+        android:text="@string/light"
         app:layout_constraintBottom_toBottomOf="@id/shuttersButton"
         app:layout_constraintEnd_toStartOf="@id/heaterButton"
         app:layout_constraintStart_toEndOf="@id/shuttersButton"
@@ -49,10 +48,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        android:text="Heater"
+        android:text="@string/heater"
         app:layout_constraintBottom_toBottomOf="@id/shuttersButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/lightButton"
         app:layout_constraintTop_toTopOf="@id/shuttersButton" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

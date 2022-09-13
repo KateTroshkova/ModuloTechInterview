@@ -55,8 +55,9 @@ class DeviceAdapter(
                 backgroundLayout.setOnClickListener {
                     onClick(item)
                 }
-                backgroundLayout.setOnClickListener {
+                backgroundLayout.setOnLongClickListener {
                     onLongClick(item)
+                    true
                 }
             }
         }

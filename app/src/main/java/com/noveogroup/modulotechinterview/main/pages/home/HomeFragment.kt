@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -64,7 +65,7 @@ class HomeFragment : BaseFragment() {
 
     private val loadingObserver: Observer<Boolean>
         get() = Observer {
-
+            binding.progressBar.show(it)
         }
 
     private val stateObserver: Observer<HomeState>

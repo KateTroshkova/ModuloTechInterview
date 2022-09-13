@@ -12,19 +12,13 @@ class HomeNavigator(navigationController: NavController) : Navigator(navigationC
     fun openDevice(device: Device) {
         when (device) {
             is Light -> navigationController.navigate(
-                HomeFragmentDirections.actionHomeToLight(
-                    device
-                )
+                HomeFragmentDirections.actionHomeToLight(device)
             )
             is Heater -> navigationController.navigate(
-                HomeFragmentDirections.actionHomeToHeater(
-                    device
-                )
+                HomeFragmentDirections.actionHomeToHeater(device)
             )
             is Shutter -> navigationController.navigate(
-                HomeFragmentDirections.actionHomeToShutters(
-                    device
-                )
+                HomeFragmentDirections.actionHomeToShutters(device)
             )
             else -> throw IllegalArgumentException()
         }
