@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview.main.pages.device_heater
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.noveogroup.modulotechinterview.common.SingleLiveData
 import com.noveogroup.modulotechinterview.common.architecture.MvvmViewModel
 import com.noveogroup.modulotechinterview.domain.entity.device.Heater
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
@@ -14,42 +15,76 @@ class HeaterViewModel(
     private val deviceInteractor: DeviceInteractor
 ) : MvvmViewModel() {
 
+    private var currentState: HeaterState =
+        HeaterState(
+            defaultHeater = savedState[KEY_DEVICE],
+            mode = savedState[KEY_MODE] ?: DeviceMode.OFF,
+            temperature = savedState[KEY_TEMPERATURE] ?: MIN_VALUE
+        )
+
     private val _state: MutableLiveData<HeaterState> by lazy { MutableLiveData() }
+    private val _errorEvent: SingleLiveData<Throwable> by lazy { SingleLiveData() }
+    private val _loadingState: MutableLiveData<Boolean> by lazy { MutableLiveData() }
     val state: LiveData<HeaterState> by lazy { _state }
+    val errorEvent: LiveData<Throwable> by lazy { _errorEvent }
+    val loadingState: LiveData<Boolean> by lazy { _loadingState }
+
+    init {
+        updateState()
+    }
 
     fun applyState(device: Heater) {
-        _state.value = _state.value?.copy(defaultHeater = device)
+        currentState = currentState.copy(
+            defaultHeater = device,
+            mode = device.mode,
+            temperature = device.temperature
+        )
+        updateState()
     }
 
     fun updateMode(isEnabled: Boolean) {
-        viewModelScope.launch(Dispatchers.Main) {
-            _state.value =
-                _state.value?.copy(mode = if (isEnabled) DeviceMode.ON else DeviceMode.OFF)
-            val heater = _state.value ?: return@launch
-            deviceInteractor.updateDevice(
-                Heater(
-                    heater.defaultHeater.id,
-                    heater.defaultHeater.deviceName,
-                    heater.mode,
-                    heater.defaultHeater.temperature
-                )
-            )
-        }
+        currentState = currentState.copy(mode = if (isEnabled) DeviceMode.ON else DeviceMode.OFF)
+        update()
+        updateState()
     }
 
     fun updateTemperature(temperature: Float) {
+        currentState = currentState.copy(temperature = temperature)
+        update()
+        updateState()
+    }
+
+    private fun update() {
         viewModelScope.launch(Dispatchers.Main) {
-            _state.value =
-                _state.value?.copy(temperature = temperature)
-            val heater = _state.value ?: return@launch
-            deviceInteractor.updateDevice(
-                Heater(
-                    heater.defaultHeater.id,
-                    heater.defaultHeater.deviceName,
-                    heater.defaultHeater.mode,
-                    heater.temperature
+            try {
+                _loadingState.value = true
+                val heater = currentState.defaultHeater ?: return@launch
+                deviceInteractor.updateDevice(
+                    Heater(
+                        heater.id,
+                        heater.deviceName,
+                        currentState.mode,
+                        currentState.temperature
+                    )
                 )
-            )
+                _loadingState.value = false
+            } catch (e: Throwable) {
+                _errorEvent.value = e
+            }
         }
+    }
+
+    private fun updateState() {
+        _state.value = currentState
+        savedState[KEY_DEVICE] = currentState.defaultHeater
+        savedState[KEY_MODE] = currentState.mode
+        savedState[KEY_TEMPERATURE] = currentState.temperature
+    }
+
+    companion object {
+        private const val KEY_DEVICE = "device"
+        private const val KEY_MODE = "mode"
+        private const val KEY_TEMPERATURE = "temperature"
+        private const val MIN_VALUE = 7f
     }
 }

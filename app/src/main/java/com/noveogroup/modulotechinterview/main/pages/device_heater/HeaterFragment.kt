@@ -6,7 +6,9 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.R
+import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.common.listener.SimpleSeekBarChangeListener
 import com.noveogroup.modulotechinterview.databinding.FragmentHeaterBinding
@@ -38,16 +40,17 @@ class HeaterFragment : BaseFragment() {
             heaterLayout.onOffSwitch.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.updateMode(isChecked)
             }
-            heaterLayout.heaterSeekBar.setOnSeekBarChangeListener(object :
-                SimpleSeekBarChangeListener() {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    viewModel.updateTemperature(progress.toFloat() / 2 + MIN_VALUE)
+            heaterLayout.heaterSeekBar.setOnSeekBarChangeListener(
+                object :
+                    SimpleSeekBarChangeListener() {
+                    override fun onProgressChanged(
+                        seekBar: SeekBar?,
+                        progress: Int,
+                        fromUser: Boolean
+                    ) {
+                        viewModel.updateTemperature(progress.toFloat() / 2 + MIN_VALUE)
+                    }
                 }
-            }
             )
         }
         observeLiveData()
@@ -56,6 +59,8 @@ class HeaterFragment : BaseFragment() {
     override fun observeLiveData() {
         super.observeLiveData()
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
+        viewModel.errorEvent.observe(viewLifecycleOwner, errorObserver)
+        viewModel.loadingState.observe(viewLifecycleOwner, loadingObserver)
     }
 
     private val stateObserver: Observer<HeaterState>
@@ -64,23 +69,32 @@ class HeaterFragment : BaseFragment() {
                 heaterLayout.onOffSwitch.isChecked = it.mode == DeviceMode.ON
                 heaterLayout.heaterSeekBar.progress = ((it.temperature - 7) * 2).toInt()
                 heaterLayout.progressView.setBackgroundColor(
-                    when {
-                        it.temperature < 14 -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.low
-                        )
-                        it.temperature in 14.0..21.0 -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.normal
-                        )
-                        else -> ContextCompat.getColor(
-                            requireContext(),
-                            R.color.high
-                        )
-                    }
+                    ContextCompat.getColor(
+                        requireContext(),
+                        when {
+                            it.temperature < 14 -> R.color.low
+                            it.temperature in 14.0..21.0 -> R.color.normal
+                            else -> R.color.high
+                        }
+                    )
                 )
                 heaterLayout.currentValueTextView.text = it.temperature.toString()
             }
+        }
+
+    private val errorObserver: Observer<Throwable>
+        get() = Observer {
+            Snackbar.make(
+                binding.deviceLayout,
+                it?.localizedMessage ?: "",
+                Snackbar.LENGTH_SHORT
+            )
+                .show()
+        }
+
+    private val loadingObserver: Observer<Boolean>
+        get() = Observer {
+            binding.progressBar.show(it)
         }
 
     companion object {
