@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview.main.pages.device_shutter
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -10,9 +11,13 @@ import com.noveogroup.modulotechinterview.R
 import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.databinding.FragmentShuttersBinding
+import com.noveogroup.modulotechinterview.main.AppBarViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ShutterFragment : BaseFragment() {
+
+    private val appBarViewModel: AppBarViewModel by activityViewModels()
+
     override val viewModel: ShutterViewModel by viewModel()
     override val navigator: ShutterNavigator by lazy { ShutterNavigator(navigationController) }
 
@@ -32,6 +37,7 @@ class ShutterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appBarViewModel.hideMenu()
         with(binding) {
             titleTextView.text = args.device.deviceName
             shuttersLayout.seekBar.onProgressChangeListener = { viewModel.updatePosition(it) }

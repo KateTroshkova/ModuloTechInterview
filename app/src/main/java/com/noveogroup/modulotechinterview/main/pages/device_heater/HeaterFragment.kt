@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -13,9 +14,13 @@ import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.common.listener.SimpleSeekBarChangeListener
 import com.noveogroup.modulotechinterview.databinding.FragmentHeaterBinding
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
+import com.noveogroup.modulotechinterview.main.AppBarViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HeaterFragment : BaseFragment() {
+
+    private val appBarViewModel: AppBarViewModel by activityViewModels()
+
     override val viewModel: HeaterViewModel by viewModel()
     override val navigator: HeaterNavigator by lazy { HeaterNavigator(navigationController) }
 
@@ -35,6 +40,7 @@ class HeaterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appBarViewModel.hideMenu()
         with(binding) {
             titleTextView.text = args.device.deviceName
             heaterLayout.onOffSwitch.setOnCheckedChangeListener { _, isChecked ->

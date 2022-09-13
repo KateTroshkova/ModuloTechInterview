@@ -4,6 +4,8 @@ import android.content.ContextWrapper
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.children
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.noveogroup.modulotechinterview.R
@@ -13,6 +15,9 @@ import com.noveogroup.modulotechinterview.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), NavigationProvider {
+
+    private val appBarViewModel: AppBarViewModel by viewModel()
+    private var menu: Menu? = null
 
     override val viewModel: MainViewModel by viewModel()
 
@@ -32,6 +37,7 @@ class MainActivity : BaseActivity(), NavigationProvider {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
+        this.menu = menu
         return true
     }
 
@@ -48,4 +54,20 @@ class MainActivity : BaseActivity(), NavigationProvider {
     override fun onSupportNavigateUp(): Boolean {
         return navigator.back()
     }
+
+    override fun observeLiveData() {
+        super.observeLiveData()
+        appBarViewModel.showMenu.observe(this, menuObserver)
+    }
+
+    private val menuObserver: Observer<Boolean>
+        get() = Observer { isVisible ->
+            menu?.children?.forEach {
+                when (it.itemId) {
+                    R.id.profile -> {
+                        it.isVisible = isVisible
+                    }
+                }
+            }
+        }
 }

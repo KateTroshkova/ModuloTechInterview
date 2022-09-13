@@ -65,8 +65,6 @@ open class VerticalSeekBar @JvmOverloads constructor(
             updateViews()
         }
 
-    private var yDelta: Int = 0
-
     init {
         attrs?.apply {
             val attributes =
@@ -93,37 +91,6 @@ open class VerticalSeekBar @JvmOverloads constructor(
             }
         }
         with(binding) {
-            thumb.setOnTouchListener { thumb, event ->
-                val border = container.measuredHeight.toFloat() * 0.01
-                val rawY = event.rawY.roundToInt()
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        yDelta = rawY -
-                                (thumb.layoutParams as LayoutParams).topMargin -
-                                thumb.measuredHeight / 2
-                        onPressListener?.invoke(progress)
-                    }
-
-                    MotionEvent.ACTION_MOVE -> {
-                        if (yDelta > border) {
-                            val positionY = rawY - yDelta
-                            val fillHeight = binding.container.measuredHeight
-                            when {
-                                positionY in 1 until fillHeight -> {
-                                    val newValue =
-                                        maxValue - (positionY.toFloat() * maxValue / fillHeight)
-                                    progress = newValue.roundToInt()
-                                }
-                                positionY <= 0 -> progress = maxValue
-                                positionY >= fillHeight -> progress = 0
-                            }
-                        }
-                    }
-
-                    MotionEvent.ACTION_UP -> onReleaseListener?.invoke(progress)
-                }
-                true
-            }
             container.setOnTouchListener { bar, event ->
                 val positionY = event.y.roundToInt()
                 val action = {
@@ -157,9 +124,7 @@ open class VerticalSeekBar @JvmOverloads constructor(
     private fun updateViews() {
         with(binding) {
             barProgress.layoutParams.height = barBackground.height * progress / maxValue
-            thumb.y = barProgress.top.toFloat()
             barProgress.requestLayout()
-            thumb.requestLayout()
         }
     }
 }

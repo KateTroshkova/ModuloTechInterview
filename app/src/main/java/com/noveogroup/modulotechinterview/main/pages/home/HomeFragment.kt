@@ -2,15 +2,20 @@ package com.noveogroup.modulotechinterview.main.pages.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.databinding.FragmentHomeBinding
+import com.noveogroup.modulotechinterview.main.AppBarViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
+
+    private val appBarViewModel: AppBarViewModel by activityViewModels()
+
     override val viewModel: HomeViewModel by viewModel()
     override val navigator: HomeNavigator by lazy { HomeNavigator(navigationController) }
 
@@ -30,6 +35,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appBarViewModel.showMenu
         with(binding) {
             lightButton.setOnClickListener {
                 viewModel.enableLightFilter()

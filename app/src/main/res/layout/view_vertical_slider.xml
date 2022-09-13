@@ -18,12 +18,4 @@
         android:layout_gravity="bottom"
         tools:background="@color/accent" />
 
-    <View
-        android:id="@+id/thumb"
-        android:layout_width="@dimen/thumb_size"
-        android:layout_height="@dimen/thumb_size"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/black"
-        android:elevation="@dimen/margin_small" />
-
 </FrameLayout>

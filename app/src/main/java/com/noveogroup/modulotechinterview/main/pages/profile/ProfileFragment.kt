@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.R
@@ -9,9 +10,13 @@ import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.common.listener.SimpleTextWatcher
 import com.noveogroup.modulotechinterview.databinding.FragmentProfileBinding
+import com.noveogroup.modulotechinterview.main.AppBarViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment() {
+
+    private val appBarViewModel: AppBarViewModel by activityViewModels()
+
     override val viewModel: ProfileViewModel by viewModel()
     override val navigator: ProfileNavigator by lazy { ProfileNavigator(navigationController) }
 
@@ -24,6 +29,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appBarViewModel.hideMenu()
         with(binding) {
             firstNameEditText.addTextChangedListener(object : SimpleTextWatcher() {
                 override fun onTextChanged(text: String) {
