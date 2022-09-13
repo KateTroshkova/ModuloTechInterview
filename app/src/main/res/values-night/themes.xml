@@ -13,4 +13,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">@color/text_primary_night</item>
+        <item name="android:textColorPrimaryInverse">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="colorPrimary">@color/primaryNight</item>
+        <item name="colorPrimaryDark">@color/primaryDarkNight</item>
+        <item name="android:fontFamily">@string/roboto_regular</item>
+    </style>
 </resources>

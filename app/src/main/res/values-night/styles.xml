@@ -44,7 +44,8 @@
     <style name="EditText" parent="Text.FontRegular.Primary">
         <item name="android:background">@drawable/shape_edit_text</item>
         <item name="boxStrokeColor">@color/selector_color_edittext</item>
-        <item name="hintTextColor">@color/text_secondary_night</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/text_primary</item>
         <item name="errorTextColor">@color/accent</item>
         <item name="android:textCursorDrawable">@null</item>
     </style>

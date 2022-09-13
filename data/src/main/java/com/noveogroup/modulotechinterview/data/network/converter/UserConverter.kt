@@ -13,6 +13,7 @@ object UserConverter : Mapper<User, UserResponse>(
             lastName = it.lastName ?: "",
             address = it.address?.let { address -> AddressConverter.fromDto(address) },
             birthdate = DateFormat.getTimeInstance().format(Date(it.birthdate ?: 0))
+                .replace(":", "/")
         )
     }
 )
