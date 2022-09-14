@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -79,31 +78,21 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
 
+    /* AndroidX */
     implementation lib.androidXAppCompat
     implementation lib.androidXRecyclerView
     implementation lib.androidXDesign
     implementation lib.androidXConstraint
     implementation lib.androidXMultiDex
 
+    /* Lifecycle */
     implementation lib.lifecycleViewModel
     implementation lib.lifecycleSavedState
     implementation lib.lifecycleLiveData
-    implementation lib.lifecycleAnnotation
-    implementation lib.lifecycleRuntine
-    kapt lib.lifecycleCompiler
     implementation lib.lifecycleNavigation
     implementation lib.lifecycleNavigationUi
 
+    /* DI */
     implementation lib.koinCore
     implementation lib.koinAndroid
-
-    implementation lib.roomCore
-    kapt lib.roomAnnotations
-    implementation lib.roomKt
-
-    testImplementation lib.junit
-    testImplementation lib.mockito
-    testImplementation lib.mockk
-    testImplementation lib.roomTest
-    testImplementation lib.testCore
 }

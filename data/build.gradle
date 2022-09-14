@@ -57,4 +57,11 @@ dependencies {
 
     /* DI */
     implementation lib.koinCore
+
+    /* Unit tests */
+    testImplementation lib.junit
+    testImplementation lib.mockito
+    testImplementation lib.mockk
+    testImplementation lib.roomTest
+    testImplementation lib.testCore
 }

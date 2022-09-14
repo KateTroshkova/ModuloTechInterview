@@ -20,6 +20,7 @@ ext.versions = [
         testCore          : "1.4.0",
 ]
 ext.lib = [
+        /* Android X */
         androidXCore         : "androidx.core:core:$versions.androidXCore",
         androidXAppCompat    : "androidx.appcompat:appcompat:$versions.androidXAppCompat",
         androidXRecyclerView : "androidx.recyclerview:recyclerview:$versions.androidXRecycler",
@@ -30,24 +31,26 @@ ext.lib = [
         lifecycleViewModel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidLifecycle",
         lifecycleSavedState  : "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.androidLifecycle",
         lifecycleLiveData    : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidLifecycle",
-        lifecycleAnnotation  : "androidx.lifecycle:lifecycle-common-java8:$versions.androidLifecycle",
-        lifecycleRuntine     : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidLifecycle",
-        lifecycleCompiler    : "androidx.lifecycle:lifecycle-compiler:$versions.androidLifecycle",
         lifecycleNavigation  : "androidx.navigation:navigation-fragment-ktx:$versions.androidNavigation",
         lifecycleNavigationUi: "androidx.navigation:navigation-ui-ktx:$versions.androidNavigation",
+        /* DI */
         koinCore             : "io.insert-koin:koin-core:$versions.koin",
         koinAndroid          : "io.insert-koin:koin-android:$versions.koin",
+        /* Network */
         retrofit2            : "com.squareup.retrofit2:retrofit:$versions.retrofit2",
         moshi                : "com.squareup.moshi:moshi:$versions.moshi",
         moshiKotlin          : "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi",
         moshiRetrofit2       : "com.squareup.retrofit2:converter-moshi:$versions.moshiRetrofit",
+        /* Database */
         roomCore             : "androidx.room:room-runtime:$versions.room",
         roomAnnotations      : "androidx.room:room-compiler:$versions.room",
         roomKt               : "androidx.room:room-ktx:$versions.room",
         roomTest             : "androidx.room:room-testing:$versions.room",
+        /* Async */
         coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+        /* Unit tests */
         junit                : "junit:junit:$versions.junit",
         mockito              : "org.mockito:mockito-core:$versions.mockito",
         mockk                : "io.mockk:mockk:$versions.mockk",
-        testCore             : "androidx.test:core:$versions.textCore",
+        testCore             : "androidx.test:core:$versions.testCore",
 ]
