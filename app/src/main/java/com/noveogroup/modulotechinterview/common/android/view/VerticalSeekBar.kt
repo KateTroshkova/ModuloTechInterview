@@ -6,7 +6,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.updateLayoutParams
 import com.noveogroup.modulotechinterview.R
+import com.noveogroup.modulotechinterview.common.android.ext.hide
+import com.noveogroup.modulotechinterview.common.android.ext.show
 import com.noveogroup.modulotechinterview.databinding.ViewVerticalSliderBinding
 import kotlin.math.roundToInt
 
@@ -39,6 +44,7 @@ open class VerticalSeekBar @JvmOverloads constructor(
         get() = binding.barProgress.solidColor
         set(value) {
             binding.barProgress.setBackgroundColor(value)
+            binding.thumb.setColorFilter(value, android.graphics.PorterDuff.Mode.SRC_IN)
         }
 
     var maxValue = DEFAULT_MAX_VALUE
@@ -123,7 +129,24 @@ open class VerticalSeekBar @JvmOverloads constructor(
 
     private fun updateViews() {
         with(binding) {
-            barProgress.layoutParams.height = barBackground.height * progress / maxValue
+            val height = barBackground.height * progress / maxValue
+            if (height > 0) {
+                barProgress.show()
+                barProgress.layoutParams.height = height
+            } else {
+                barProgress.hide()
+            }
+            if (progress < 50) {
+                thumb.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    topToTop = ConstraintSet.UNSET
+                    bottomToTop = barProgress.id
+                }
+            } else {
+                thumb.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    topToTop = barProgress.id
+                    bottomToTop = ConstraintSet.UNSET
+                }
+            }
             barProgress.requestLayout()
         }
     }

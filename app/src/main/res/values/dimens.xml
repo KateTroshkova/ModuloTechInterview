@@ -11,6 +11,9 @@
     <dimen name="button_radius">40dp</dimen>
     <dimen name="edit_text_radius">4dp</dimen>
     <dimen name="thumb_size">24dp</dimen>
+    <dimen name="thumb_inner_radius">12dp</dimen>
+    <dimen name="thumb_outer_radius">300dp</dimen>
+    <dimen name="seek_bar_width">4dp</dimen>
 
     <dimen name="stroke_width">1dp</dimen>
 </resources>
