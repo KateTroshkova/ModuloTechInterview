@@ -14,7 +14,7 @@ import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 
 class DeviceAdapter(
     private val onClick: (device: Device) -> Unit,
-    private val onLongClick: (device: Device) -> Unit
+    private val onDeleteClick: (device: Device) -> Unit
 ) : BaseRecyclerAdapter<Device, DeviceAdapter.DeviceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
@@ -22,7 +22,7 @@ class DeviceAdapter(
     }
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        holder.bind(items[position], onClick, onLongClick)
+        holder.bind(items[position], onClick, onDeleteClick)
     }
 
     inner class DeviceViewHolder(
@@ -35,30 +35,27 @@ class DeviceAdapter(
         fun bind(
             item: Device,
             onClick: (device: Device) -> Unit,
-            onLongClick: (device: Device) -> Unit
-        ) = with(itemView) {
-            with(binding) {
-                deviceImageView.setImageResource(
-                    when (item.productType) {
-                        ProductType.LIGHT -> R.drawable.ic_light
-                        ProductType.SHUTTER -> R.drawable.ic_shutters
-                        ProductType.HEATER -> R.drawable.ic_heater
-                    }
-                )
-                nameTextView.text = item.deviceName
-                currentValueTextView.text = when (item) {
-                    is Light -> item.intensity.toString()
-                    is Heater -> item.temperature.toString()
-                    is Shutter -> item.position.toString()
-                    else -> ""
+            onDeleteClick: (device: Device) -> Unit
+        ) = with(binding) {
+            deviceImageView.setImageResource(
+                when (item.productType) {
+                    ProductType.LIGHT -> R.drawable.ic_light
+                    ProductType.SHUTTER -> R.drawable.ic_shutters
+                    ProductType.HEATER -> R.drawable.ic_heater
                 }
-                backgroundLayout.setOnClickListener {
-                    onClick(item)
-                }
-                backgroundLayout.setOnLongClickListener {
-                    onLongClick(item)
-                    true
-                }
+            )
+            nameTextView.text = item.deviceName
+            currentValueTextView.text = when (item) {
+                is Light -> item.intensity.toString()
+                is Heater -> item.temperature.toString()
+                is Shutter -> item.position.toString()
+                else -> ""
+            }
+            backgroundLayout.setOnClickListener {
+                onClick(item)
+            }
+            deleteLayout.setOnClickListener {
+                onDeleteClick(item)
             }
         }
     }
