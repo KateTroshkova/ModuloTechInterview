@@ -3,10 +3,10 @@ package com.noveogroup.modulotechinterview.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.noveogroup.modulotechinterview.data.database.entity.AddressDB.Companion.TABLE_NAME
+import com.noveogroup.modulotechinterview.data.database.entity.AddressEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-data class AddressDB(
+data class AddressEntity(
     @ColumnInfo(name = COLUMN_CITY) val city: String?,
     @ColumnInfo(name = COLUMN_POSTAL_CODE) val postalCode: String?,
     @ColumnInfo(name = COLUMN_STREET) val street: String?,

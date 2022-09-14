@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ModuloTechInterview</string>
+    <string name="app_name">Smart home</string>
     <string name="light">Lumière</string>
     <string name="heater">Chauffage</string>
     <string name="shutters">Volets</string>

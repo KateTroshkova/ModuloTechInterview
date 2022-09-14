@@ -1,8 +1,8 @@
 package com.noveogroup.modulotechinterview
 
 import com.noveogroup.modulotechinterview.data.database.dao.UserDao
-import com.noveogroup.modulotechinterview.data.database.entity.AddressDB
-import com.noveogroup.modulotechinterview.data.database.entity.UserDB
+import com.noveogroup.modulotechinterview.data.database.entity.AddressEntity
+import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 import com.noveogroup.modulotechinterview.data.repository.UserRepository
 import com.noveogroup.modulotechinterview.domain.entity.user.Address
 import com.noveogroup.modulotechinterview.domain.entity.user.User
@@ -18,14 +18,14 @@ class UserInteractorTest {
 
     private val userDao: UserDao = mockkClass(UserDao::class) {
         coEvery { selectAll() } returns listOf(
-            UserDB(
+            UserEntity(
                 firstName = "Noveo",
                 lastName = "Test",
-                address = AddressDB(null, null, null, null, null),
+                address = AddressEntity(null, null, null, null, null),
                 birthdate = "06/13/2022"
             )
         )
-        coEvery { update(any<UserDB>()) } coAnswers { 1 }
+        coEvery { update(any<UserEntity>()) } coAnswers { 1 }
     }
 
     private lateinit var interactor: UserInteractor

@@ -1,7 +1,7 @@
 package com.noveogroup.modulotechinterview
 
 import com.noveogroup.modulotechinterview.data.database.dao.DeviceDao
-import com.noveogroup.modulotechinterview.data.database.entity.DeviceDB
+import com.noveogroup.modulotechinterview.data.database.entity.DeviceEntity
 import com.noveogroup.modulotechinterview.data.repository.DeviceRepository
 import com.noveogroup.modulotechinterview.domain.entity.device.Light
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
@@ -18,12 +18,12 @@ class DeviceInteractorTest {
 
     private val deviceDao: DeviceDao = mockkClass(DeviceDao::class) {
         coEvery { selectAll() } returns listOf(
-            DeviceDB("0", ProductType.LIGHT, "Light", 42, DeviceMode.ON, null, null),
-            DeviceDB("1", ProductType.HEATER, "Heater", null, DeviceMode.ON, null, 42f),
-            DeviceDB("2", ProductType.SHUTTER, "Shutter", null, null, 42, null)
+            DeviceEntity("0", ProductType.LIGHT, "Light", 42, DeviceMode.ON, null, null),
+            DeviceEntity("1", ProductType.HEATER, "Heater", null, DeviceMode.ON, null, 42f),
+            DeviceEntity("2", ProductType.SHUTTER, "Shutter", null, null, 42, null)
         )
-        coEvery { delete(any<DeviceDB>()) } coAnswers { 0 }
-        coEvery { update(any<DeviceDB>()) } coAnswers { 1 }
+        coEvery { delete(any<DeviceEntity>()) } coAnswers { 0 }
+        coEvery { update(any<DeviceEntity>()) } coAnswers { 1 }
     }
 
     private lateinit var interactor: DeviceInteractor

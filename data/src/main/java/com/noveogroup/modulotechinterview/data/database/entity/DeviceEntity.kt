@@ -3,12 +3,12 @@ package com.noveogroup.modulotechinterview.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.noveogroup.modulotechinterview.data.database.entity.DeviceDB.Companion.TABLE_NAME
+import com.noveogroup.modulotechinterview.data.database.entity.DeviceEntity.Companion.TABLE_NAME
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
 import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 
 @Entity(tableName = TABLE_NAME)
-data class DeviceDB(
+data class DeviceEntity(
     @PrimaryKey @ColumnInfo(name = COLUMN_ID) val id: String,
     @ColumnInfo(name = COLUMN_PRODUCT_TYPE) val productType: ProductType,
     @ColumnInfo(name = COLUMN_DEVICE_NAME) val deviceName: String?,

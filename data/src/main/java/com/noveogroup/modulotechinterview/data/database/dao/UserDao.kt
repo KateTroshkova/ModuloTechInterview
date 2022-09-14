@@ -2,15 +2,15 @@ package com.noveogroup.modulotechinterview.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.noveogroup.modulotechinterview.data.database.entity.UserDB
+import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 
 @Dao
-abstract class UserDao : BaseDao<UserDB>() {
+abstract class UserDao : BaseDao<UserEntity>() {
 
-    @Query(UserDB.QUERY_SELECT_ALL)
-    abstract suspend fun selectAll(): List<UserDB>
+    @Query(UserEntity.QUERY_SELECT_ALL)
+    abstract suspend fun selectAll(): List<UserEntity>
 
-    @Query(UserDB.QUERY_DELETE_ALL)
+    @Query(UserEntity.QUERY_DELETE_ALL)
     abstract suspend fun deleteAll()
 
 }

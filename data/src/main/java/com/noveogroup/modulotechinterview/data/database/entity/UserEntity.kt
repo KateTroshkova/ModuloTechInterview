@@ -4,13 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.noveogroup.modulotechinterview.data.database.entity.UserDB.Companion.TABLE_NAME
+import com.noveogroup.modulotechinterview.data.database.entity.UserEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-data class UserDB(
+data class UserEntity(
     @ColumnInfo(name = COLUMN_FIRST_NAME) val firstName: String?,
     @ColumnInfo(name = COLUMN_LAST_NAME) val lastName: String?,
-    @Embedded val address: AddressDB?,
+    @Embedded val address: AddressEntity?,
     @ColumnInfo(name = COLUMN_DATE) val birthdate: String?
 ) {
 

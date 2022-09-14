@@ -1,6 +1,6 @@
 package com.noveogroup.modulotechinterview.data.database.mapper
 
-import com.noveogroup.modulotechinterview.data.database.entity.DeviceDB
+import com.noveogroup.modulotechinterview.data.database.entity.DeviceEntity
 import com.noveogroup.modulotechinterview.domain.common.Mapper
 import com.noveogroup.modulotechinterview.domain.entity.device.Device
 import com.noveogroup.modulotechinterview.domain.entity.device.Heater
@@ -9,7 +9,7 @@ import com.noveogroup.modulotechinterview.domain.entity.device.Shutter
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
 import com.noveogroup.modulotechinterview.domain.entity.type.ProductType
 
-internal object DeviceDBMapper : Mapper<Device, DeviceDB>(
+internal object DeviceDBMapper : Mapper<Device, DeviceEntity>(
     fromDtoMapper = {
         when (it.productType) {
             ProductType.LIGHT -> Light(
@@ -32,7 +32,7 @@ internal object DeviceDBMapper : Mapper<Device, DeviceDB>(
         }
     },
     fromBusinessMapper = {
-        DeviceDB(
+        DeviceEntity(
             id = it.id,
             productType = it.productType,
             deviceName = it.deviceName,
