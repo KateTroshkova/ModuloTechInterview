@@ -8,6 +8,9 @@ import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.noveogroup.modulotechinterview.R
 import com.noveogroup.modulotechinterview.common.architecture.BaseActivity
 import com.noveogroup.modulotechinterview.common.navigation.NavigationProvider
@@ -32,6 +35,15 @@ class MainActivity : BaseActivity(), NavigationProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        NavigationUI.setupWithNavController(binding.toolbar, navigationController)
+        setupActionBarWithNavController(
+            navigationController,
+            AppBarConfiguration.Builder(navigationController.graph).build()
+        )
     }
 
     override fun onApplyScreenInsets() {
