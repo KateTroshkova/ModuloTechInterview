@@ -23,11 +23,11 @@ val networkModule = module {
             .build()
     }
     single {
-        provideInventoryApi(get(), get())
+        provideApi(get(), get())
     }
 }
 
-private fun provideInventoryApi(
+private fun provideApi(
     retrofitBuilder: Retrofit.Builder,
     okHttpClient: OkHttpClient
 ): Storage42Api = retrofitBuilder
