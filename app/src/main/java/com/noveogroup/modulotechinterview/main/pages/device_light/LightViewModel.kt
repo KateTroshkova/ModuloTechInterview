@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.device_light
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotechinterview.common.SingleLiveData
 import com.noveogroup.modulotechinterview.common.architecture.MvvmViewModel
@@ -12,8 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LightViewModel(
+    savedState: SavedStateHandle,
     private val deviceInteractor: DeviceInteractor
-) : MvvmViewModel() {
+) : MvvmViewModel(savedState) {
 
     private var currentState = LightState(
         defaultLight = savedState[KEY_DEVICE],
@@ -83,8 +85,8 @@ class LightViewModel(
     }
 
     companion object {
-        private const val KEY_DEVICE = "device"
-        private const val KEY_MODE = "mode"
-        private const val KEY_INTENSITY = "intensity"
+        private const val KEY_DEVICE = "light"
+        private const val KEY_MODE = "light_mode"
+        private const val KEY_INTENSITY = "light_intensity"
     }
 }

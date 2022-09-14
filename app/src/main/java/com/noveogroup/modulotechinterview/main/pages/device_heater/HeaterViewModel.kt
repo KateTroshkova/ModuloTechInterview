@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.device_heater
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotechinterview.common.SingleLiveData
 import com.noveogroup.modulotechinterview.common.architecture.MvvmViewModel
@@ -12,14 +13,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HeaterViewModel(
+    savedState: SavedStateHandle,
     private val deviceInteractor: DeviceInteractor
-) : MvvmViewModel() {
+) : MvvmViewModel(savedState) {
 
     private var currentState: HeaterState =
         HeaterState(
-            defaultHeater = savedState[KEY_DEVICE],
-            mode = savedState[KEY_MODE] ?: DeviceMode.OFF,
-            temperature = savedState[KEY_TEMPERATURE] ?: MIN_VALUE
+            defaultHeater = this.savedState[KEY_DEVICE],
+            mode = this.savedState[KEY_MODE] ?: DeviceMode.OFF,
+            temperature = this.savedState[KEY_TEMPERATURE] ?: MIN_VALUE
         )
 
     private val _state: MutableLiveData<HeaterState> by lazy { MutableLiveData() }
@@ -84,9 +86,9 @@ class HeaterViewModel(
     }
 
     companion object {
-        private const val KEY_DEVICE = "device"
-        private const val KEY_MODE = "mode"
-        private const val KEY_TEMPERATURE = "temperature"
+        private const val KEY_DEVICE = "heater"
+        private const val KEY_MODE = "heater_mode"
+        private const val KEY_TEMPERATURE = "heater_temperature"
         private const val MIN_VALUE = 7f
     }
 }

@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotechinterview.R
 import com.noveogroup.modulotechinterview.common.SingleLiveData
@@ -14,8 +15,9 @@ import kotlinx.coroutines.launch
 import java.text.DateFormat
 
 class ProfileViewModel(
+    savedState: SavedStateHandle,
     private val userInteractor: UserInteractor
-) : MvvmViewModel() {
+) : MvvmViewModel(savedState) {
 
     private var currentState: ProfileState = ProfileState(
         defaultUser = savedState[KEY_USER],

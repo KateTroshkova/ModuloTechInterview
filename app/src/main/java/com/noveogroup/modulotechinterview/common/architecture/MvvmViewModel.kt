@@ -4,9 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import org.koin.core.component.KoinComponent
 
-abstract class MvvmViewModel : ViewModel(), KoinComponent {
-
-    var savedState: SavedStateHandle = SavedStateHandle()
+abstract class MvvmViewModel(
+    protected val savedState: SavedStateHandle
+) : ViewModel(), KoinComponent {
 
     open fun attach() {
     }

@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview.di
 import com.noveogroup.modulotechinterview.domain.interactor.DeviceInteractor
 import com.noveogroup.modulotechinterview.domain.interactor.SyncInteractor
 import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
+import com.noveogroup.modulotechinterview.main.AppBarViewModel
 import com.noveogroup.modulotechinterview.main.MainActivity
 import com.noveogroup.modulotechinterview.main.MainViewModel
 import com.noveogroup.modulotechinterview.main.pages.device_heater.HeaterFragment
@@ -22,15 +23,16 @@ val activityModule = module {
 
     scope<MainActivity> {
         viewModel {
-            MainViewModel()
+            MainViewModel(get())
         }
+        viewModel { AppBarViewModel(get()) }
     }
 }
 
 val homeFragmentModule = module {
     scope<HomeFragment> {
         viewModel {
-            HomeViewModel(get(), get())
+            HomeViewModel(get(), get(), get())
         }
     }
 }
@@ -38,7 +40,7 @@ val homeFragmentModule = module {
 val deviceHeaterFragmentModule = module {
     scope<HeaterFragment> {
         viewModel {
-            HeaterViewModel(get())
+            HeaterViewModel(get(), get())
         }
     }
 }
@@ -46,7 +48,7 @@ val deviceHeaterFragmentModule = module {
 val deviceLightFragmentModule = module {
     scope<LightFragment> {
         viewModel {
-            LightViewModel(get())
+            LightViewModel(get(), get())
         }
     }
 }
@@ -54,7 +56,7 @@ val deviceLightFragmentModule = module {
 val deviceShuttersFragmentModule = module {
     scope<ShutterFragment> {
         viewModel {
-            ShutterViewModel(get())
+            ShutterViewModel(get(), get())
         }
     }
 }
@@ -62,7 +64,7 @@ val deviceShuttersFragmentModule = module {
 val profileFragmentModule = module {
     scope<ProfileFragment> {
         viewModel {
-            ProfileViewModel(get())
+            ProfileViewModel(get(), get())
         }
     }
 }

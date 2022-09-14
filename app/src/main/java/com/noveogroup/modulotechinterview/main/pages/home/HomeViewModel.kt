@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotechinterview.common.SingleLiveData
 import com.noveogroup.modulotechinterview.common.architecture.MvvmViewModel
@@ -12,9 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
+    savedState: SavedStateHandle,
     private val syncInteractor: SyncInteractor,
     private val deviceInteractor: DeviceInteractor
-) : MvvmViewModel() {
+) : MvvmViewModel(savedState) {
 
     private var currentState: HomeState = HomeState(
         devices = savedState[KEY_DEVICES] ?: listOf(),
@@ -90,8 +92,8 @@ class HomeViewModel(
 
     private companion object {
         private const val KEY_DEVICES = "devices"
-        private const val KEY_LIGHT = "light"
-        private const val KEY_HEATER = "heater"
-        private const val KEY_SHUTTER = "shutter"
+        private const val KEY_LIGHT = "light_enabled"
+        private const val KEY_HEATER = "heater_enabled"
+        private const val KEY_SHUTTER = "shutter_enabled"
     }
 }

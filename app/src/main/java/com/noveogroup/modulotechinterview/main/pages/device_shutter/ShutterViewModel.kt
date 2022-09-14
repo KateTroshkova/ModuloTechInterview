@@ -2,6 +2,7 @@ package com.noveogroup.modulotechinterview.main.pages.device_shutter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.noveogroup.modulotechinterview.common.SingleLiveData
 import com.noveogroup.modulotechinterview.common.architecture.MvvmViewModel
@@ -11,8 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ShutterViewModel(
+    savedState: SavedStateHandle,
     private val deviceInteractor: DeviceInteractor
-) : MvvmViewModel() {
+) : MvvmViewModel(savedState) {
 
     private var currentState: ShutterState = ShutterState(
         defaultShutter = savedState[KEY_DEVICE],
@@ -65,7 +67,7 @@ class ShutterViewModel(
     }
 
     companion object {
-        private const val KEY_DEVICE = "device"
-        private const val KEY_POSITION = "position"
+        private const val KEY_DEVICE = "shutter"
+        private const val KEY_POSITION = "shutter_position"
     }
 }
