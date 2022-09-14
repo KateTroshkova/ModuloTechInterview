@@ -12,7 +12,6 @@ import androidx.viewbinding.ViewBinding
 import com.noveogroup.modulotechinterview.common.android.delegate.KeyboardDelegate
 import com.noveogroup.modulotechinterview.common.android.ext.applyNoStatusBar
 import com.noveogroup.modulotechinterview.common.android.ext.setMarginExtra
-import com.noveogroup.modulotechinterview.common.android.ext.setPaddingExtra
 import com.noveogroup.modulotechinterview.common.architecture.binding.BindingFactory
 import com.noveogroup.modulotechinterview.common.architecture.binding.NestedInflater
 import com.noveogroup.modulotechinterview.common.architecture.binding.ViewBindingDelegate
@@ -37,7 +36,7 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
     var statusBarHeight: Int = 0
 
     private var onViewCreatedCalled = false
-    protected val contentView: View get() = window.decorView.rootView
+    private val contentView: View get() = window.decorView.rootView
 
     protected open fun observeLiveData() {}
     protected open fun removeLiveDataObservers() {}
@@ -74,7 +73,12 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
         keyboardDelegate = KeyboardDelegate(this)
     }
 
-    protected fun onSetContentView(view: View) {
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
+        view?.let { onSetContentView(it) }
+    }
+
+    private fun onSetContentView(view: View) {
         statusBarHeight.takeIf { it > 0 }?.also { onApplyScreenInsets() }
         ViewCompat.setOnApplyWindowInsetsListener(view) { _, windowInsets ->
             val invokeInsetListener = statusBarHeight == 0
@@ -89,7 +93,6 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
         if (!onViewCreatedCalled) {
             onViewCreatedCalled = true
             viewBindingDelegate.onCreateView(contentView)
-            onSetContentView(contentView)
         }
     }
 
@@ -136,9 +139,5 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
 
     protected fun View.applyStatusBarInset() {
         setMarginExtra(topMargin = statusBarHeight)
-    }
-
-    protected fun View.applyStatusBarInsetWithPadding() {
-        setPaddingExtra(topPadding = statusBarHeight)
     }
 }

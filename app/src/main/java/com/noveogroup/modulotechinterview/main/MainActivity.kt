@@ -31,8 +31,12 @@ class MainActivity : BaseActivity(), NavigationProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onSetContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+    }
+
+    override fun onApplyScreenInsets() {
+        super.onApplyScreenInsets()
+        binding.mainLayout.applyStatusBarInset()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

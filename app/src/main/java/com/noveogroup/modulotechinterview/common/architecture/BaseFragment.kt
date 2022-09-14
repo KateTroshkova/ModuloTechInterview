@@ -8,22 +8,19 @@ import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.common.android.delegate.KeyboardDelegate
-import com.noveogroup.modulotechinterview.common.android.ext.setMarginExtra
 import com.noveogroup.modulotechinterview.common.android.ext.setPaddingExtra
 import com.noveogroup.modulotechinterview.common.architecture.binding.BindingFactory
 import com.noveogroup.modulotechinterview.common.architecture.binding.NestedInflater
 import com.noveogroup.modulotechinterview.common.architecture.binding.ViewBindingDelegate
 import com.noveogroup.modulotechinterview.common.architecture.binding.terminalInflater
-import com.noveogroup.modulotechinterview.common.navigation.NavigationProvider
 import com.noveogroup.modulotechinterview.common.navigation.Navigator
 import com.noveogroup.modulotechinterview.domain.ext.safeCast
 import org.koin.androidx.scope.ScopeFragment
 
 abstract class BaseFragment : ScopeFragment(), NestedInflater {
 
-    protected val baseActivity: BaseActivity get() = activity?.safeCast<BaseActivity>()!!
+    private val baseActivity: BaseActivity get() = activity?.safeCast<BaseActivity>()!!
 
     /* MVVM */
     protected abstract val viewModel: MvvmViewModel
@@ -31,21 +28,15 @@ abstract class BaseFragment : ScopeFragment(), NestedInflater {
     /* NAVIGATION */
     protected val navigationController: NavController get() = findNavController()
     protected abstract val navigator: Navigator
-    protected open val navigationProvider: NavigationProvider?
-        get() = baseActivity.safeCast<NavigationProvider>()
 
     /* DELEGATES */
-    protected val keyboardDelegate: KeyboardDelegate? get() = baseActivity.keyboardDelegate
+    private val keyboardDelegate: KeyboardDelegate? get() = baseActivity.keyboardDelegate
     private val viewBindingDelegate by lazy { ViewBindingDelegate() }
 
-    protected var statusBarHeight: Int = 0
+    private var statusBarHeight: Int = 0
 
     protected open fun observeLiveData() {}
     protected open fun removeLiveDataObservers() {}
-
-    protected open fun activityNavigator(): Navigator? {
-        return requireActivity().safeCast<NavigationProvider>()?.navigator
-    }
 
     fun <Binding : ViewBinding> viewBinding(factory: BindingFactory<Binding>) =
         viewBindingDelegate.createPrimaryViewBindingHandler(factory)
@@ -139,14 +130,6 @@ abstract class BaseFragment : ScopeFragment(), NestedInflater {
      * Called in [onDestroy] method.
      */
     protected open fun onDestroyed() {
-    }
-
-    open fun showErrorWithSnackbar(message: String, parent: View) {
-        Snackbar.make(parent, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    protected fun View.applyStatusBarInset() {
-        setMarginExtra(topMargin = statusBarHeight)
     }
 
     protected fun View.applyStatusBarInsetWithPadding() {
