@@ -68,7 +68,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="0123456789/"
+                android:digits="0123456789/:."
                 android:hint="@string/hint_birthdate"
                 android:maxEms="10" />
         </com.google.android.material.textfield.TextInputLayout>

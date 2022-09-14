@@ -11,7 +11,7 @@ import com.noveogroup.modulotechinterview.domain.entity.user.User
 import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
+import java.text.DateFormat
 
 class ProfileViewModel(
     private val userInteractor: UserInteractor
@@ -74,7 +74,7 @@ class ProfileViewModel(
 
     fun saveChanges() {
         val isFormattedDate = try {
-            SimpleDateFormat(DATE_FORMAT).parse(currentState.birthDate)
+            DateFormat.getTimeInstance().parse(currentState.birthDate)
             currentState.birthDate.length == DATE_LENGTH
         } catch (e: Throwable) {
             false
@@ -202,7 +202,6 @@ class ProfileViewModel(
         private const val KEY_STREET = "street"
         private const val KEY_STREET_CODE = "street_code"
         private const val KEY_COUNTRY = "country"
-        private const val DATE_FORMAT = "MM/dd/yyyy"
         private const val DATE_LENGTH = 10
     }
 }
