@@ -32,6 +32,10 @@ class HomeViewModel(
 
     init {
         updateState()
+    }
+
+    override fun attach() {
+        super.attach()
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 _loadingState.value = true
