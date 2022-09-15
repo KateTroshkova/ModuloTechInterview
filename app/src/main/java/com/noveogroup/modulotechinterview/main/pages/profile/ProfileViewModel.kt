@@ -76,8 +76,8 @@ class ProfileViewModel(
 
     fun saveChanges() {
         val isFormattedDate = try {
-            DateFormat.getTimeInstance().parse(currentState.birthDate)
-            currentState.birthDate.length == DATE_LENGTH
+            DateFormat.getDateInstance(DateFormat.SHORT).parse(currentState.birthDate)
+            true
         } catch (e: Throwable) {
             false
         }
@@ -204,6 +204,5 @@ class ProfileViewModel(
         private const val KEY_STREET = "street"
         private const val KEY_STREET_CODE = "street_code"
         private const val KEY_COUNTRY = "country"
-        private const val DATE_LENGTH = 10
     }
 }
