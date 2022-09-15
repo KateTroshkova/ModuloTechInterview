@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appBarViewModel.showMenu
+        appBarViewModel.showMenu()
         with(binding) {
             lightButton.setOnClickListener {
                 viewModel.enableLightFilter()

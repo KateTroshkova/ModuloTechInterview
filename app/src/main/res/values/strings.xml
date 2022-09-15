@@ -18,4 +18,7 @@
     <string name="save_success">Changes are saved</string>
     <string name="personal_info_title">Personal information</string>
     <string name="address_title">Address</string>
+    <string name="devices_title">Devices</string>
+    <string name="device_settings_title">Settings</string>
+    <string name="profile_title">Profile</string>
 </resources>

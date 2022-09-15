@@ -19,4 +19,7 @@
     <string name="save_success">Les modifications sont enregistrées</string>
     <string name="personal_info_title">Renseignements personnels</string>
     <string name="address_title">Adresse</string>
+    <string name="devices_title">Dispositifs</string>
+    <string name="device_settings_title">Réglages</string>
+    <string name="profile_title">Profil</string>
 </resources>

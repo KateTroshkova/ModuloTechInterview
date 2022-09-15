@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.noveogroup.modulotechinterview.main.pages.home.HomeFragment"
-        android:label=""
+        android:label="@string/devices_title"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_heater"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/heaterFragment"
         android:name="com.noveogroup.modulotechinterview.main.pages.device_heater.HeaterFragment"
-        android:label=""
+        android:label="@string/device_settings_title"
         tools:layout="@layout/fragment_heater">
         <argument
             android:name="device"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/lightFragment"
         android:name="com.noveogroup.modulotechinterview.main.pages.device_light.LightFragment"
-        android:label=""
+        android:label="@string/device_settings_title"
         tools:layout="@layout/fragment_light">
         <argument
             android:name="device"
@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/shutterFragment"
         android:name="com.noveogroup.modulotechinterview.main.pages.device_shutter.ShutterFragment"
-        android:label=""
+        android:label="@string/device_settings_title"
         tools:layout="@layout/fragment_shutters">
         <argument
             android:name="device"
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.noveogroup.modulotechinterview.main.pages.profile.ProfileFragment"
-        android:label=""
+        android:label="@string/profile_title"
         tools:layout="@layout/fragment_profile" />
 
 </navigation>
