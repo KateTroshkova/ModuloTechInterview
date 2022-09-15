@@ -2,7 +2,6 @@ package com.noveogroup.modulotechinterview.main.pages.profile
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.noveogroup.modulotechinterview.R
@@ -11,13 +10,14 @@ import com.noveogroup.modulotechinterview.common.architecture.BaseFragment
 import com.noveogroup.modulotechinterview.common.listener.SimpleTextWatcher
 import com.noveogroup.modulotechinterview.databinding.FragmentProfileBinding
 import com.noveogroup.modulotechinterview.main.AppBarViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class ProfileFragment : BaseFragment() {
 
-    private val appBarViewModel: AppBarViewModel by activityViewModels()
+    private val appBarViewModel: AppBarViewModel by sharedStateViewModel()
 
-    override val viewModel: ProfileViewModel by viewModel()
+    override val viewModel: ProfileViewModel by stateViewModel()
     override val navigator: ProfileNavigator by lazy { ProfileNavigator(navigationController) }
 
     private val binding by viewBinding(FragmentProfileBinding::inflate)
@@ -27,9 +27,13 @@ class ProfileFragment : BaseFragment() {
         binding.profileLayout.applyStatusBarInsetWithPadding()
     }
 
+    override fun onResume() {
+        super.onResume()
+        appBarViewModel.hideMenu()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appBarViewModel.hideMenu()
         with(binding) {
             firstNameEditText.addTextChangedListener(object : SimpleTextWatcher() {
                 override fun onTextChanged(text: String) {

@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:tint="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
-        app:srcCompat="@drawable/ic_shutters" />
+        app:srcCompat="@drawable/ic_heater" />
 
     <TextView
         android:id="@+id/titleTextView"
@@ -26,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Shutters" />
+        tools:text="Heater" />
 
     <TextView
         android:id="@+id/subtitleTextView"
@@ -37,25 +38,25 @@
         android:gravity="start"
         android:text="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleImageView" />
+        app:layout_constraintStart_toEndOf="@id/titleImageView"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
     <include
-        android:id="@+id/shuttersLayout"
-        layout="@layout/view_shutters"
-        android:layout_width="match_parent"
+        android:id="@+id/heaterLayout"
+        layout="@layout/view_heater"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/subtitleTextView"
+        app:layout_constraintStart_toStartOf="@id/subtitleTextView"
         app:layout_constraintTop_toBottomOf="@id/subtitleTextView" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,10 @@ class AppBarViewModel(
     private val _showMenu: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val showMenu: LiveData<Boolean> by lazy { _showMenu }
 
+    fun repeatValue() {
+        _showMenu.value = _showMenu.value
+    }
+
     fun showMenu() {
         _showMenu.value = true
     }

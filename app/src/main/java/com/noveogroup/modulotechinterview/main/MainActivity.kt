@@ -15,14 +15,14 @@ import com.noveogroup.modulotechinterview.R
 import com.noveogroup.modulotechinterview.common.architecture.BaseActivity
 import com.noveogroup.modulotechinterview.common.navigation.NavigationProvider
 import com.noveogroup.modulotechinterview.databinding.ActivityMainBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class MainActivity : BaseActivity(), NavigationProvider {
 
-    private val appBarViewModel: AppBarViewModel by viewModel()
+    private val appBarViewModel: AppBarViewModel by stateViewModel()
     private var menu: Menu? = null
 
-    override val viewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by stateViewModel()
 
     override val navigationController: NavController get() = findNavController(R.id.mainRootContainer)
     override val navigator: MainNavigator by lazy { MainNavigator(navigationController) }
@@ -54,6 +54,7 @@ class MainActivity : BaseActivity(), NavigationProvider {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         this.menu = menu
+        appBarViewModel.repeatValue()
         return true
     }
 

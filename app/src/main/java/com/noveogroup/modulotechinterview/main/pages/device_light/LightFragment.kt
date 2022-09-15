@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -15,13 +14,14 @@ import com.noveogroup.modulotechinterview.common.listener.SimpleSeekBarChangeLis
 import com.noveogroup.modulotechinterview.databinding.FragmentLightBinding
 import com.noveogroup.modulotechinterview.domain.entity.type.DeviceMode
 import com.noveogroup.modulotechinterview.main.AppBarViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class LightFragment : BaseFragment() {
 
-    private val appBarViewModel: AppBarViewModel by activityViewModels()
+    private val appBarViewModel: AppBarViewModel by sharedStateViewModel()
 
-    override val viewModel: LightViewModel by viewModel()
+    override val viewModel: LightViewModel by stateViewModel()
     override val navigator: LightNavigator by lazy { LightNavigator(navigationController) }
 
     val args by navArgs<LightFragmentArgs>()
@@ -35,12 +35,12 @@ class LightFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        appBarViewModel.hideMenu()
         viewModel.applyState(args.device)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appBarViewModel.hideMenu()
         with(binding) {
             titleTextView.text = args.device.deviceName
             lightLayout.onOffSwitch.setOnCheckedChangeListener { _, isChecked ->
