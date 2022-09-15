@@ -2,7 +2,6 @@ package com.noveogroup.modulotechinterview
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.lifecycle.SavedStateHandle
 import androidx.multidex.MultiDexApplication
 import com.noveogroup.modulotechinterview.data.di.databaseModule
 import com.noveogroup.modulotechinterview.data.di.networkModule
@@ -24,7 +23,6 @@ class App : MultiDexApplication() {
     private val appModule = module {
         single { this }
         single<SharedPreferences> { getSharedPreferences(packageName, Context.MODE_PRIVATE) }
-        single { SavedStateHandle() }
     }
 
     override fun onCreate() {
