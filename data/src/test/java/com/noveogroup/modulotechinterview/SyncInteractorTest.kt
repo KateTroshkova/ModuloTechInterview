@@ -77,6 +77,7 @@ class SyncInteractorTest {
     private val userDao: UserDao = mockkClass(UserDao::class) {
         coEvery { deleteAll() } coAnswers { }
         coEvery { upsert(any<List<UserEntity>>()) } coAnswers { }
+        coEvery { upsert(any<UserEntity>()) } coAnswers { }
     }
 
     private lateinit var interactor: SyncInteractor
