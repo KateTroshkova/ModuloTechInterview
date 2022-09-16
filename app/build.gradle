@@ -62,6 +62,10 @@ android {
         disable 'MissingPrefix'
         disable 'MissingRegistered'
         disable 'Instantiatable'
+        disable 'VectorPath'
+        disable 'UnusedIds'
+        disable 'ObsoleteSdkInt'
+        disable 'UnusedResources'
     }
 
     compileOptions {

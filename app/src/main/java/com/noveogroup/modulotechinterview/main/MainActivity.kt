@@ -54,6 +54,9 @@ class MainActivity : BaseActivity(), NavigationProvider {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         this.menu = menu
+        // When orientation changes fragment's onResume is called before onCreateOptionsMenu
+        // Therefore menu state applied to the wrong menu instance
+        // We need this method to apply actual menu state after configuration change
         appBarViewModel.repeatValue()
         return true
     }

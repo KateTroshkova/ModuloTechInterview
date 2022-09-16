@@ -3,8 +3,8 @@
     <string name="light">Light</string>
     <string name="heater">Heater</string>
     <string name="shutters">Shutters</string>
-    <string name="light_mode">On/Off</string>
-    <string name="settings">Settings</string>
+    <string name="mode">On/Off</string>
+    <string name="settings">Device details</string>
     <string name="format_error">Wrong format of input data</string>
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
