@@ -5,7 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.noveogroup.modulotechinterview.data.database.entity.UserEntity.Companion.TABLE_NAME
-import java.util.*
+import java.util.Date
 
 @Entity(tableName = TABLE_NAME)
 data class UserEntity(
@@ -26,7 +26,6 @@ data class UserEntity(
         private const val COLUMN_ID = "id"
         private const val COLUMN_FIRST_NAME = "first_name"
         private const val COLUMN_LAST_NAME = "last_name"
-        private const val COLUMN_ADDRESS = "address"
         private const val COLUMN_DATE = "date"
     }
 }

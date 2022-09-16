@@ -13,7 +13,7 @@ import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
 
 class ProfileViewModel(
     savedState: SavedStateHandle,

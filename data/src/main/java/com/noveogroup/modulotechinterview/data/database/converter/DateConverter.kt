@@ -1,7 +1,7 @@
 package com.noveogroup.modulotechinterview.data.database.converter
 
 import androidx.room.TypeConverter
-import java.util.*
+import java.util.Date
 
 internal object DateConverter {
 

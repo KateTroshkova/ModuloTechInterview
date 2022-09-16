@@ -3,7 +3,7 @@ package com.noveogroup.modulotechinterview.data.database.mapper
 import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 import com.noveogroup.modulotechinterview.domain.common.Mapper
 import com.noveogroup.modulotechinterview.domain.entity.user.User
-import java.util.*
+import java.util.Date
 
 internal object UserDBMapper : Mapper<User, UserEntity>(
     fromDtoMapper = {

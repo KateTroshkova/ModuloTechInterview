@@ -13,6 +13,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.util.Date
 
 class UserInteractorTest {
 
@@ -22,7 +23,7 @@ class UserInteractorTest {
                 firstName = "Noveo",
                 lastName = "Test",
                 address = AddressEntity(null, null, null, null, null),
-                birthdate = "06/13/2022"
+                birthdate = Date()
             )
         )
         coEvery { update(any<UserEntity>()) } coAnswers { 1 }
@@ -47,19 +48,19 @@ class UserInteractorTest {
     }
 
     @Test
-    fun deleteDeviceSuccess() {
+    fun updateUserSuccess() {
         runBlocking {
             val oldUser = User(
                 firstName = "Noveo",
                 lastName = "Test",
                 address = Address("", "", "", "", ""),
-                birthdate = "06/13/2022"
+                birthdate = Date()
             )
             val newUser = User(
                 firstName = "Noveo",
                 lastName = "Test",
                 address = Address("city", "424242", "street", "42A", ""),
-                birthdate = "06/13/2022"
+                birthdate = Date()
             )
             interactor.updateUser(oldUser, newUser)
             Assert.assertEquals(true, true)

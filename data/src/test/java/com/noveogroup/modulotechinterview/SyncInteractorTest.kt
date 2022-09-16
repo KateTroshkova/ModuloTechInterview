@@ -1,10 +1,8 @@
 package com.noveogroup.modulotechinterview
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import com.noveogroup.modulotechinterview.data.database.Database
 import com.noveogroup.modulotechinterview.data.database.dao.DeviceDao
 import com.noveogroup.modulotechinterview.data.database.dao.UserDao
+import com.noveogroup.modulotechinterview.data.database.entity.DeviceEntity
 import com.noveogroup.modulotechinterview.data.network.api.Storage42Api
 import com.noveogroup.modulotechinterview.data.network.response.ApiResponse
 import com.noveogroup.modulotechinterview.data.network.response.DeviceModeResponse
@@ -17,7 +15,6 @@ import com.noveogroup.modulotechinterview.domain.interactor.SyncInteractor
 import io.mockk.coEvery
 import io.mockk.mockkClass
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -71,23 +68,18 @@ class SyncInteractorTest {
         coEvery { hasLocalData = any() } coAnswers { }
     }
 
-    private lateinit var database: Database
+    private val deviceDao: DeviceDao = mockkClass(DeviceDao::class) {
+        coEvery { deleteAll() } coAnswers { }
+        coEvery { upsert(any<List<DeviceEntity>>()) } coAnswers { }
+    }
 
-    private lateinit var deviceDao: DeviceDao
-
-    private lateinit var userDao: UserDao
+    private val userDao: UserDao = mockkClass(UserDao::class) {
+    }
 
     private lateinit var interactor: SyncInteractor
 
     @Before
     fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            Database::class.java
-        ).allowMainThreadQueries().build()
-
-        deviceDao = database.deviceDao()
-        userDao = database.userDao()
         interactor = SyncInteractor(SyncRepository(api, deviceDao, userDao, preferences))
     }
 
@@ -97,10 +89,5 @@ class SyncInteractorTest {
             interactor.syncData()
             Assert.assertEquals(true, true)
         }
-    }
-
-    @After
-    fun clear() {
-        database.close()
     }
 }

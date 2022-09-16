@@ -1,6 +1,6 @@
 package com.noveogroup.modulotechinterview.domain.entity.user
 
-import java.util.*
+import java.util.Date
 
 data class User(
     val firstName: String,

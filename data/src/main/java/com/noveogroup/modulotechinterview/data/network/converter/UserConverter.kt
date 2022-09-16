@@ -3,7 +3,7 @@ package com.noveogroup.modulotechinterview.data.network.converter
 import com.noveogroup.modulotechinterview.data.network.response.UserResponse
 import com.noveogroup.modulotechinterview.domain.common.Mapper
 import com.noveogroup.modulotechinterview.domain.entity.user.User
-import java.util.*
+import java.util.Date
 
 object UserConverter : Mapper<User, UserResponse>(
     fromDtoMapper = {
