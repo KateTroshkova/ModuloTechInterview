@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview
 import com.noveogroup.modulotechinterview.data.database.dao.DeviceDao
 import com.noveogroup.modulotechinterview.data.database.dao.UserDao
 import com.noveogroup.modulotechinterview.data.database.entity.DeviceEntity
+import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 import com.noveogroup.modulotechinterview.data.network.api.Storage42Api
 import com.noveogroup.modulotechinterview.data.network.response.ApiResponse
 import com.noveogroup.modulotechinterview.data.network.response.DeviceModeResponse
@@ -74,6 +75,8 @@ class SyncInteractorTest {
     }
 
     private val userDao: UserDao = mockkClass(UserDao::class) {
+        coEvery { deleteAll() } coAnswers { }
+        coEvery { upsert(any<List<UserEntity>>()) } coAnswers { }
     }
 
     private lateinit var interactor: SyncInteractor
