@@ -1,10 +1,8 @@
 package com.noveogroup.modulotechinterview.common.architecture
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.core.os.ConfigurationCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
@@ -18,7 +16,6 @@ import com.noveogroup.modulotechinterview.common.architecture.binding.ViewBindin
 import com.noveogroup.modulotechinterview.common.architecture.binding.terminalInflater
 import com.noveogroup.modulotechinterview.common.navigation.Navigator
 import org.koin.androidx.scope.ScopeActivity
-import java.util.*
 
 abstract class BaseActivity : ScopeActivity(), NestedInflater {
 
@@ -54,10 +51,6 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
      * It is invoked only once, when [statusBarHeight] is found.
      */
     open fun onApplyScreenInsets() {}
-
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(fixContextLocale(newBase))
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,24 +110,6 @@ abstract class BaseActivity : ScopeActivity(), NestedInflater {
     open fun applyTheme() {
         // setup Activity theme if needed
         window.applyNoStatusBar()
-    }
-
-    @Suppress("DEPRECATION")
-    private fun fixContextLocale(context: Context?): Context? {
-        if (context == null) return context
-        val resources = context.resources
-        val configuration = resources.configuration
-        val locale =
-            when (val primaryLocale = ConfigurationCompat.getLocales(configuration).get(0)) {
-                Locale.FRENCH -> primaryLocale
-                Locale.FRANCE -> primaryLocale
-                Locale.CANADA_FRENCH -> primaryLocale
-                else -> Locale.US
-            }
-        Locale.setDefault(locale)
-
-        configuration.setLocale(locale)
-        return context.createConfigurationContext(configuration)
     }
 
     protected fun View.applyStatusBarInset() {

@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.noveogroup.modulotechinterview.data.database.converter.DateConverter
 import com.noveogroup.modulotechinterview.data.database.converter.EnumConverter
 import com.noveogroup.modulotechinterview.data.database.dao.DeviceDao
 import com.noveogroup.modulotechinterview.data.database.dao.UserDao
@@ -20,6 +21,7 @@ import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 )
 @TypeConverters(
     EnumConverter::class,
+    DateConverter::class,
 )
 abstract class Database : RoomDatabase() {
 

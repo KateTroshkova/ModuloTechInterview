@@ -13,6 +13,7 @@ import com.noveogroup.modulotechinterview.domain.interactor.UserInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.DateFormat
+import java.util.*
 
 class ProfileViewModel(
     savedState: SavedStateHandle,
@@ -59,7 +60,7 @@ class ProfileViewModel(
                     defaultUser = user,
                     firstName = user.firstName,
                     lastName = user.lastName,
-                    birthDate = user.birthdate,
+                    birthDate = DateFormat.getDateInstance(DateFormat.SHORT).format(user.birthdate),
                     city = user.address?.city ?: "",
                     postalCode = user.address?.postalCode ?: "",
                     street = user.address?.street ?: "",
@@ -169,7 +170,9 @@ class ProfileViewModel(
                             streetCode = currentState.streetCode,
                             country = currentState.country
                         ),
-                        currentState.birthDate
+                        DateFormat.getDateInstance(DateFormat.SHORT)
+                            .parse(currentState.birthDate)
+                            ?: Date()
                     )
                 )
                 _loadingState.value = false

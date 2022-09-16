@@ -3,6 +3,7 @@ package com.noveogroup.modulotechinterview.data.database.mapper
 import com.noveogroup.modulotechinterview.data.database.entity.UserEntity
 import com.noveogroup.modulotechinterview.domain.common.Mapper
 import com.noveogroup.modulotechinterview.domain.entity.user.User
+import java.util.*
 
 internal object UserDBMapper : Mapper<User, UserEntity>(
     fromDtoMapper = {
@@ -10,7 +11,7 @@ internal object UserDBMapper : Mapper<User, UserEntity>(
             firstName = it.firstName ?: "",
             lastName = it.lastName ?: "",
             address = it.address?.let { address -> AddressDBMapper.fromDto(address) },
-            birthdate = it.birthdate ?: ""
+            birthdate = it.birthdate ?: Date()
         )
     },
     fromBusinessMapper = {

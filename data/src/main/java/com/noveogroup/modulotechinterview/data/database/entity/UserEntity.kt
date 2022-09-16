@@ -5,13 +5,14 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.noveogroup.modulotechinterview.data.database.entity.UserEntity.Companion.TABLE_NAME
+import java.util.*
 
 @Entity(tableName = TABLE_NAME)
 data class UserEntity(
     @ColumnInfo(name = COLUMN_FIRST_NAME) val firstName: String?,
     @ColumnInfo(name = COLUMN_LAST_NAME) val lastName: String?,
     @Embedded val address: AddressEntity?,
-    @ColumnInfo(name = COLUMN_DATE) val birthdate: String?
+    @ColumnInfo(name = COLUMN_DATE) val birthdate: Date?,
 ) {
 
     @PrimaryKey(autoGenerate = true)
